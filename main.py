@@ -19,6 +19,7 @@ def main():
 
     heroku_url = os.getenv("HEROKU_URL", "")
 
+    logger.info(os.getenv("PORT", "1222212122"))
     bot = Bot(api_key)
     bot.start(url=heroku_url)
 

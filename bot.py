@@ -30,8 +30,12 @@ class Bot:
     def start(self, url: str = "", port: int = 443):
         if self.updater:
             if url:
-                self.updater.start_webhook(listen="0.0.0.0", port=port, url_path=self.api_key)
-                self.updater.bot.set_webhook(f'{url}/{self.api_key}')
+                self.updater.start_webhook(
+                    listen="0.0.0.0",
+                    port=port,
+                    url_path=self.api_key,
+                    webhook_url=f'{url}/{self.api_key}'
+                )
             else:
                 self.updater.start_polling()
                 self.updater.idle()

@@ -29,16 +29,16 @@ class Bot:
 
     def start(self, url: str = "", port: int = 8443):
         if self.updater:
-            # if url:
-            #     self.updater.start_webhook(
-            #         listen="0.0.0.0",
-            #         port=port,
-            #         url_path=self.api_key,
-            #         webhook_url=f'{url}{self.api_key}'
-            #     )
-            # else:
-            self.updater.start_polling()
-            self.updater.idle()
+            if url:
+                self.updater.start_webhook(
+                    listen="0.0.0.0",
+                    port=port,
+                    url_path=self.api_key,
+                    webhook_url=f'{url}{self.api_key}'
+                )
+            else:
+                self.updater.start_polling()
+                self.updater.idle()
 
     @staticmethod
     def __start_command(update: Update, context: CallbackContext):
@@ -63,7 +63,7 @@ class Bot:
             target_time = datetime.strptime(str(context.args[0]), TIME_FORMAT).time() \
                 .replace(tzinfo=pytz.timezone('Asia/Jerusalem'))
 
-            message = f'הפעם לא נכשח למלא דוח1 ב {target_time.strftime("%H:%M")} \U0001F910'
+            message = f'הפעם לא נשכח למלא דוח1 ב {target_time.strftime("%H:%M")} \U0001F910'
 
             job_removed = Bot.__remove_job_if_exists(str(chat_id), context)
             context.job_queue.run_daily(Bot.__one_report_alarm, context=chat_id, days=(0, 1, 2, 3, 6),

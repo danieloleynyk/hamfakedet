@@ -14,15 +14,14 @@ logger = logging.getLogger(__name__)
 
 def main():
     api_key = os.getenv("API_KEY", None)
-    port = os.getenv("PORT", "hello")
-    logger.info(port)
+    port = os.getenv("PORT", 8443)
     if not api_key:
         sys.exit(1)
 
     heroku_url = os.getenv("HEROKU_URL", "")
 
     bot = Bot(api_key)
-    bot.start(url=heroku_url)
+    bot.start(url=heroku_url, port=port)
 
 
 if __name__ == '__main__':

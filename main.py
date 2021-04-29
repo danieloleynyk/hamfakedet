@@ -1,7 +1,7 @@
 import logging
 import sys
 import os
-from bot import Bot
+from hamfakedetbot import HamfakedetBot
 
 
 # Enable logging
@@ -20,7 +20,7 @@ def main():
 
     heroku_url = os.getenv("HEROKU_URL", "")
 
-    bot = Bot(api_key)
+    bot = HamfakedetBot(api_key)
     bot.start(url=heroku_url, port=port)
 
 

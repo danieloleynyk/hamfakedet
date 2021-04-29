@@ -27,7 +27,7 @@ class Bot:
         dispatcher.add_handler(MessageHandler(Filters.text, Bot.__handle_message))
         dispatcher.add_error_handler(Bot.__error)
 
-    def start(self, url: str = "", port: int = 8443):
+    def start(self, url: str = "", port: int = 443):
         if self.updater:
             if url:
                 self.updater.start_webhook(

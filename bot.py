@@ -38,7 +38,8 @@ class Bot:
                 )
             else:
                 self.updater.start_polling()
-                self.updater.idle()
+
+            self.updater.idle()
 
     @staticmethod
     def __start_command(update: Update, context: CallbackContext):

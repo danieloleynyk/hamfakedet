@@ -19,7 +19,6 @@ def main():
 
     heroku_url = os.getenv("HEROKU_URL", "")
 
-    logger.info(f"url: {heroku_url}")
     bot = Bot(api_key)
     bot.start(url=heroku_url)
 

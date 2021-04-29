@@ -14,6 +14,8 @@ logger = logging.getLogger(__name__)
 
 def main():
     api_key = os.getenv("API_KEY", None)
+    port = os.getenv("PORT", "hello")
+    logger.info(port)
     if not api_key:
         sys.exit(1)
 

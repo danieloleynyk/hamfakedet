@@ -35,7 +35,7 @@ class Bot:
                     listen="0.0.0.0",
                     port=port,
                     url_path=self.api_key,
-                    webhook_url=f'{url}/{self.api_key}'
+                    webhook_url=f'{url}{self.api_key}'
                 )
             else:
                 self.updater.start_polling()

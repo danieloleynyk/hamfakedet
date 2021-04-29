@@ -30,7 +30,6 @@ class Bot:
     def start(self, url: str = "", port: int = 8443):
         if self.updater:
             if url:
-                logger.info(f'{url}/{self.api_key}')
                 self.updater.start_webhook(
                     listen="0.0.0.0",
                     port=port,

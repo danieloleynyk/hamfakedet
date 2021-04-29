@@ -27,11 +27,11 @@ class Bot:
         dispatcher.add_handler(MessageHandler(Filters.text, Bot.__handle_message))
         dispatcher.add_error_handler(Bot.__error)
 
-    def start(self, port: int, heroku_url: str = ""):
+    def start(self, url: str = "", port: int = 443):
         if self.updater:
-            if heroku_url:
+            if url:
                 self.updater.start_webhook(listen="0.0.0.0", port=port, url_path=self.api_key)
-                self.updater.bot.set_webhook(f'{heroku_url}/{self.api_key}')
+                self.updater.bot.set_webhook(f'{url}/{self.api_key}')
             else:
                 self.updater.start_polling()
                 self.updater.idle()

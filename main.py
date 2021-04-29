@@ -18,11 +18,10 @@ def main():
         sys.exit(1)
 
     heroku_url = os.getenv("HEROKU_URL", "")
-    port = int(os.getenv("PORT", 443))
 
-    logger.info(f"url: {heroku_url} port: {port}")
+    logger.info(f"url: {heroku_url}")
     bot = Bot(api_key)
-    bot.start(port, heroku_url)
+    bot.start(url=heroku_url)
 
 
 if __name__ == '__main__':

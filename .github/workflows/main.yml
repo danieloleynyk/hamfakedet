@@ -34,11 +34,3 @@ jobs:
             telegram_token=${{ secrets.TELEGRAM_TOKEN }}
           push: true
           tags: ${{ secrets.DOCKER_REPOSITORY }}/hamfakedet:latest
-
-      # Builds the docker image
-      - name: docker build
-        run: docker build -t hamfakedet --no-cache --build-arg telegram_token=${{ secrets.TELEGRAM_TOKEN}} .
-
-      # Pushes the image a docker repository
-      - name: docker push
-        run: docker tag hamfakedet:latest ${{ secrets.DOCKER_REPOSITORY }}/hamfakedet:latest

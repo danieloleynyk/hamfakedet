@@ -13,15 +13,14 @@ logger = logging.getLogger(__name__)
 
 
 def main():
-    api_key = os.getenv("API_KEY", None)
-    port = os.getenv("PORT", 8443)
+    logger.info('starting hamfakedet bot...')
+    api_key = os.getenv("TELEGRAM_TOKEN", None)
     if not api_key:
+        logger.error('no api_key')
         sys.exit(1)
 
-    heroku_url = os.getenv("HEROKU_URL", "")
-
     bot = HamfakedetBot(api_key)
-    bot.start(url=heroku_url, port=port)
+    bot.start()
 
 
 if __name__ == '__main__':

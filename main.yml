@@ -1,0 +1,30 @@
+name: hamfakedet_cicd
+
+on:
+  push:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  deploy_to_dockerhub:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: Docker Login
+        run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
+
+      # Builds the docker image
+      - name: docker build
+        run: docker build -t hamfakedet --no-cache --build-arg telegram_token=${{ secrets.TELEGRAM_TOKEN}} .
+
+      # Pushes the image a docker repository
+      - name: docker push
+        run: docker tag hamfakedet:latest ${{ secrets.DOCKER_REPOSITORY }}/hamfakedet:latest

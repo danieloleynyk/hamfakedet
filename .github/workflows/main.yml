@@ -29,3 +29,24 @@ jobs:
             telegram_token=${{ secrets.TELEGRAM_TOKEN }}
           push: true
           tags: ${{ secrets.DOCKER_REPOSITORY }}/hamfakedet:latest
+
+  deploy_to_kubernetes:
+    runs-on: ubuntu-latest
+    environment:
+        name: prod
+    
+    steps:
+      - uses: actions/checkout@master
+      - name: deploy to cluster
+        uses: steebchen/kubectl@master
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+        with:
+          args: apply -f deploy/deployment.yml
+      - name: verify deployment
+        uses: steebchen/kubectl@master
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+          KUBECTL_VERSION: "1.20"
+        with:
+          args: '"rollout status deployment/hamfakedet"'

@@ -45,7 +45,7 @@ class HamfakedetBot:
 
     @staticmethod
     def __handle_start(update: Update, _: CallbackContext):
-        update.message.reply_text('המפקדת כאן בשבילך! D:')
+        update.message.reply_text('המפקדת כאן בשבילך מהקוברנטיס! D:')
 
     @staticmethod
     def __handle_message(update: Update, _: CallbackContext):

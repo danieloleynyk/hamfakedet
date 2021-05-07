@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: hamfakedet
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hamfakedet
+  namespace: hamfakedet
+  labels:
+    app: hamfakedet
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hamfakedet
+  template:
+    metadata:
+      labels:
+        app: hamfakedet
+    spec:
+      containers:
+      - name: hamfakedet
+        image: danieloleynyk/hamfakedet:latest

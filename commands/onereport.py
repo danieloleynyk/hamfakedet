@@ -23,6 +23,8 @@ def get_one_report_handler() -> ConversationHandler:
     time_options = ['08:00', '08:30', '09:00', 'אחר']
 
     def choose_time_from_options(update: Update, _: CallbackContext) -> int:
+        logger.info(update)
+        
         reply_keyboard = [time_options]
 
         update.message.reply_text(
@@ -33,6 +35,8 @@ def get_one_report_handler() -> ConversationHandler:
         return SCHEDULE
 
     def choose_other_time(update: Update, _: CallbackContext) -> int:
+        logger.info(update)
+        
         update.message.reply_text(
             'באיזה שעה? (לדוגמה 08:45)',
             reply_markup=ReplyKeyboardRemove(),
@@ -41,6 +45,8 @@ def get_one_report_handler() -> ConversationHandler:
         return SCHEDULE
 
     def schedule(update: Update, context: CallbackContext) -> int:
+        logger.info(update)
+        
         chat_id = update.message.chat_id
 
         target_time = datetime.strptime(update.message.text, TIME_FORMAT).time() \
@@ -60,6 +66,8 @@ def get_one_report_handler() -> ConversationHandler:
         return ConversationHandler.END
 
     def cancel(update: Update, _: CallbackContext) -> int:
+        logger.info(update)
+        
         update.message.reply_text(
             'מנסה לעשות לי בלאגן? לא רוצה לא צריך...', reply_markup=ReplyKeyboardRemove()
         )

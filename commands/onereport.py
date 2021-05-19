@@ -20,7 +20,7 @@ logger = logging.getLogger()
 
 
 def get_one_report_handler() -> ConversationHandler:
-    time_options = ['08:00', '08:30', '09:00', 'אחר']
+    time_options = ['07:00', '07:30', '08:00', 'אחר']
 
     def choose_time_from_options(update: Update, _: CallbackContext) -> int:
         logger.info(update)
